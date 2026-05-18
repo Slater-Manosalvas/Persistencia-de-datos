@@ -48,7 +48,8 @@ El proyecto implementa:
 
 # Modelo Entidad Relación
 
-El sistema incluye un MER 
+<img width="1536" height="1024" alt="Diagrama entidad Relación Rally" src="https://github.com/user-attachments/assets/09a6a015-b63f-4264-8466-f7b9b1db527b" />
+
 
 # Estructura del Proyecto
 
