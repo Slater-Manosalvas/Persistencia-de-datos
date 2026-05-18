@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 public class Main {
 
@@ -98,6 +99,66 @@ public class Main {
         em.persist(vehiculo);
 
         em.getTransaction().commit();
+
+        // ====================================
+        // CONSULTA 1 - FILTRO
+        // ====================================
+
+        TypedQuery<Vehiculo> queryVehiculos =
+                em.createQuery(
+                        "SELECT v FROM Vehiculo v WHERE v.marca = :marca",
+                        Vehiculo.class
+                );
+
+        queryVehiculos.setParameter("marca", "Citroen");
+
+        List<Vehiculo> vehiculos = queryVehiculos.getResultList();
+
+        System.out.println("=== VEHICULOS FILTRADOS ===");
+
+        for (Vehiculo v : vehiculos) {
+            System.out.println(v.getMarca() + " " + v.getModelo());
+        }
+
+        // ====================================
+        // CONSULTA 2 - ORDENAMIENTO
+        // ====================================
+
+        TypedQuery<Piloto> queryPilotos =
+                em.createQuery(
+                        "SELECT p FROM Piloto p ORDER BY p.edad DESC",
+                        Piloto.class
+                );
+
+        List<Piloto> pilotos = queryPilotos.getResultList();
+
+        System.out.println("=== PILOTOS ORDENADOS ===");
+
+        for (Piloto p : pilotos) {
+            System.out.println(p.getNombre() + " - " + p.getEdad());
+        }
+
+        // ====================================
+        // CONSULTA 3 - PAGINACION
+        // ====================================
+
+        TypedQuery<Carrera> queryCarreras =
+                em.createQuery(
+                        "SELECT c FROM Carrera c",
+                        Carrera.class
+                );
+
+        queryCarreras.setFirstResult(0);
+        queryCarreras.setMaxResults(5);
+
+        List<Carrera> carrerasPaginadas =
+                queryCarreras.getResultList();
+
+        System.out.println("=== CARRERAS PAGINADAS ===");
+
+        for (Carrera c : carrerasPaginadas) {
+            System.out.println(c.getNombre());
+        }
 
         em.close();
         emf.close();
