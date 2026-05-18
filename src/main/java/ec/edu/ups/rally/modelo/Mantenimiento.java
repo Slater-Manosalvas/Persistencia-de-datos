@@ -1,16 +1,17 @@
 package ec.edu.ups.rally.modelo;
 
+import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-public class Componente {
+public class Mantenimiento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String nombre;
-    private String estado;
+    private Date fecha;
+    private String descripcion;
 
     @ManyToOne
     @JoinColumn(name = "vehiculo_id")
@@ -24,20 +25,20 @@ public class Componente {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Vehiculo getVehiculo() {

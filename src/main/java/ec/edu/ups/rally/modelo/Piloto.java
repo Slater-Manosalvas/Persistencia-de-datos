@@ -3,16 +3,17 @@ package ec.edu.ups.rally.modelo;
 import javax.persistence.*;
 
 @Entity
-public class Componente {
+public class Piloto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String nombre;
-    private String estado;
+    private String nacionalidad;
+    private int edad;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "vehiculo_id")
     private Vehiculo vehiculo;
 
@@ -32,12 +33,20 @@ public class Componente {
         this.nombre = nombre;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getNacionalidad() {
+        return nacionalidad;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
     public Vehiculo getVehiculo() {
